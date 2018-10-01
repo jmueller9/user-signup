@@ -16,7 +16,7 @@ def empty_value(x):
         return False
 
 def length_of_char(x):
-    if len(x) < 21 and len(x) > 2:
+    if len(x) < 30 and len(x) > 2:
         return True
     else:
         return False
