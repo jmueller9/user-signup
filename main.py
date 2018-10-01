@@ -1,15 +1,11 @@
 from flask import Flask, request, redirect, render_template
-import os
 import cgi
-import jinja2
-
-template_dir = os.path.join(os.path.dirname(__file__), "templates")
-jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape=True)
+import os
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
-@app.route("/signup/")
+@app.route("/")
 def display_user_signup_form():
     return render_template("main.html")
 
@@ -49,7 +45,7 @@ def more_than_one_dot(x):
     else:
         return False
 
-@app.route("/signup/", methods = ["POST"])
+@app.route("/", methods = ["POST"])
 def signup_complete():
     username = request.form["username"]
     password = request.form["password"]
@@ -148,9 +144,8 @@ def signup_complete():
         return render_template('main.html', username_error=username_error, username=username, password_error=password_error, password=password, password_validate_error=password_validate_error, password_validate=password_validate, email_error=email_error, email=email)
 
 
-@app.route('/welcome/')
+@app.route('/welcome')
 def valid_signup():
-    template = jinja_env.get_template("welcome.html")
     username = request.args.get('username')
     return render_template('welcome.html', username=username)
 
